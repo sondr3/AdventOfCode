@@ -4,7 +4,8 @@ version = "0.1.0"
 authors = ["Sondre Nilsen <nilsen.sondre@gmail.com>"]
 
 [dependencies]
+hashbrown = "0.1"
 
 [[bin]]
-name = "day01"
-path = "src/day01"
+name = "aoc18"
+path = "src/main.rs"
