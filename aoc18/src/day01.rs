@@ -2,7 +2,7 @@ use hashbrown::HashSet;
 use utils::parse;
 
 pub fn run() -> Result<(), Box<std::error::Error>> {
-    let out = parse("inputs/day01.txt")?;
+    let out = parse("inputs/aoc18/day01.txt")?;
 
     let sum: i32 = out.iter().sum();
     println!("{:?}", sum);
