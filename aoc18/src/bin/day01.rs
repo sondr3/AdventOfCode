@@ -5,9 +5,9 @@ use aoc18::hashbrown;
 use hashbrown::HashSet;
 
 const FILE: &str = include_str!("../../inputs/day01.txt");
-lazy_static!(
+lazy_static! {
     static ref PUZZLE: Vec<i32> = FILE.lines().map(|c| c.trim().parse().unwrap()).collect();
-);
+}
 
 fn main() {
     println!("{}", part_one(&PUZZLE));
@@ -26,7 +26,8 @@ fn part_two(input: &[i32]) -> i32 {
         .scan(0, |frequency, &curr| {
             *frequency += curr;
             Some(*frequency)
-        }).find(|frequency| !frequencies.insert(*frequency))
+        })
+        .find(|frequency| !frequencies.insert(*frequency))
         .unwrap();
 
     frequency

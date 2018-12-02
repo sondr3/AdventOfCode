@@ -4,9 +4,9 @@ use aoc18::hashbrown;
 use hashbrown::HashMap;
 
 const FILE: &str = include_str!("../../inputs/day02.txt");
-lazy_static!(
+lazy_static! {
     static ref PUZZLE: Vec<String> = FILE.lines().map(|w| w.trim().to_string()).collect();
-);
+}
 
 fn main() {
     println!("{}", part_one(PUZZLE.as_slice()));
@@ -68,15 +68,28 @@ mod day02 {
 
     #[test]
     fn part_1() {
-        let boxes: Vec<String> = vec!["abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"].iter().map(|w| w.to_string()).collect();
+        let boxes: Vec<String> = vec![
+            "abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab",
+        ]
+        .iter()
+        .map(|w| w.to_string())
+        .collect();
         assert_eq!(12, part_one(&boxes));
         assert_eq!(7350, part_one(PUZZLE.as_slice()));
     }
 
     #[test]
     fn part_2() {
-        let boxes: Vec<String> = vec!["abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"].iter().map(|w| w.to_string()).collect();
+        let boxes: Vec<String> = vec![
+            "abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz",
+        ]
+        .iter()
+        .map(|w| w.to_string())
+        .collect();
         assert_eq!(String::from("fgij"), part_two(&boxes));
-        assert_eq!(String::from("wmlnjevbfodamyiqpucrhsukg"), part_two(PUZZLE.as_slice()));
+        assert_eq!(
+            String::from("wmlnjevbfodamyiqpucrhsukg"),
+            part_two(PUZZLE.as_slice())
+        );
     }
 }
