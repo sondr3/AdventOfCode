@@ -1,4 +1,4 @@
-# Christmas of Code
+# Christmas of Code [![Build Status](https://travis-ci.com/sondr3/ChristmasOfCode.svg?branch=master)](https://travis-ci.com/sondr3/ChristmasOfCode)
 
 These are my solutions to various advent coding challenges, mostly Advent of
 Code but also some from a company called knowit. To run the various solutions

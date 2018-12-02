@@ -1,0 +1,18 @@
+language: rust
+sudo: false
+cache: cargo
+rust:
+  - nightly
+
+matrix:
+  fast_finish: true
+
+  include:
+    - name: "release"
+      script:
+        - cargo build --verbose --all --release
+        - cargo test --verbose --all --release
+
+script:
+- cargo build --all --verbose
+- cargo test --all --verbose
