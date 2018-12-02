@@ -1,8 +1,9 @@
 use hashbrown::HashSet;
-use utils::parse;
+
+const PUZZLE: &str = include_str!("../inputs/day01.txt");
 
 pub fn run() -> Result<(), Box<std::error::Error>> {
-    let out = parse("inputs/aoc18/day01.txt")?;
+    let out: Vec<i32> = PUZZLE.lines().map(|c| c.trim().parse().unwrap()).collect();
 
     let sum: i32 = out.iter().sum();
     println!("{:?}", sum);
