@@ -1,4 +1,5 @@
 [workspace]
 members = [
     "aoc18",
+    "knowit18"
 ]
