@@ -20,7 +20,7 @@ fn part_one(input: &[i32]) -> i32 {
 
 fn part_two(input: &[i32]) -> i32 {
     let mut frequencies = HashSet::new();
-    let frequency = input
+    input
         .iter()
         .cycle()
         .scan(0, |frequency, &curr| {
@@ -28,9 +28,7 @@ fn part_two(input: &[i32]) -> i32 {
             Some(*frequency)
         })
         .find(|frequency| !frequencies.insert(*frequency))
-        .unwrap();
-
-    frequency
+        .unwrap()
 }
 
 #[cfg(test)]
