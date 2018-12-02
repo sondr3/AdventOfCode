@@ -10,17 +10,17 @@ lazy_static!(
 );
 
 fn main() {
-    println!("{}", part_one());
-    println!("{}", part_two());
+    println!("{}", part_one(&PUZZLE));
+    println!("{}", part_two(&PUZZLE));
 }
 
-fn part_one() -> i32 {
-    PUZZLE.iter().sum()
+fn part_one(input: &[i32]) -> i32 {
+    input.iter().sum()
 }
 
-fn part_two() -> i32 {
+fn part_two(input: &[i32]) -> i32 {
     let mut frequencies = HashSet::new();
-    let frequency = PUZZLE
+    let frequency = input
         .iter()
         .cycle()
         .scan(0, |frequency, &curr| {
@@ -38,11 +38,19 @@ mod day01 {
 
     #[test]
     fn part_1() {
-        assert_eq!(518, part_one());
+        assert_eq!(3, part_one(&vec![1, -2, 3, 1]));
+        assert_eq!(3, part_one(&vec![1, 1, 1]));
+        assert_eq!(0, part_one(&vec![1, 1, -2]));
+        assert_eq!(-6, part_one(&vec![-1, -2, -3]));
+        assert_eq!(518, part_one(&PUZZLE));
     }
 
     #[test]
     fn part_2() {
-        assert_eq!(72889, part_two());
+        assert_eq!(2, part_two(&vec![1, -2, 3, 1]));
+        assert_eq!(10, part_two(&vec![3, 3, 4, -2, -4]));
+        assert_eq!(5, part_two(&vec![-6, 3, 8, 5, -6]));
+        assert_eq!(14, part_two(&vec![7, 7, -2, -7, -4]));
+        assert_eq!(72889, part_two(&PUZZLE));
     }
 }

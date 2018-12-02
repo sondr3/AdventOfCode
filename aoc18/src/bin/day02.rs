@@ -5,18 +5,18 @@ use hashbrown::HashMap;
 
 const FILE: &str = include_str!("../../inputs/day02.txt");
 lazy_static!(
-    static ref PUZZLE: Vec<&'static str> = FILE.lines().map(|w| w.trim()).collect();
+    static ref PUZZLE: Vec<String> = FILE.lines().map(|w| w.trim().to_string()).collect();
 );
 
 fn main() {
-    println!("{}", part_one());
-    println!("{}", part_two());
+    println!("{}", part_one(PUZZLE.as_slice()));
+    println!("{}", part_two(PUZZLE.as_slice()));
 }
 
-fn part_one() -> i32 {
+fn part_one(input: &[String]) -> i32 {
     let mut out = HashMap::new();
 
-    for words in PUZZLE.iter() {
+    for words in input.iter() {
         let mut counts = HashMap::new();
         for c in words.chars() {
             *counts.entry(c).or_insert(0) += 1;
@@ -39,9 +39,9 @@ fn part_one() -> i32 {
     out.get(&2).unwrap() * out.get(&3).unwrap()
 }
 
-fn part_two() -> String {
-    for (i, word) in PUZZLE.iter().enumerate() {
-        for other in PUZZLE.iter().skip(i + 1) {
+fn part_two(input: &[String]) -> String {
+    for (i, word) in input.iter().enumerate() {
+        for other in input.iter().skip(i + 1) {
             let mut diff = 0;
             let mut removed = 0;
             for (j, (x, y)) in word.chars().zip(other.chars()).enumerate() {
@@ -54,9 +54,6 @@ fn part_two() -> String {
             if diff == 1 {
                 let mut finished = other.to_string();
                 finished.remove(removed);
-                println!("{}", word);
-                println!("{}", other);
-                println!("{}", finished);
                 return finished;
             }
         }
@@ -71,11 +68,15 @@ mod day02 {
 
     #[test]
     fn part_1() {
-        assert_eq!(7350, part_one());
+        let boxes: Vec<String> = vec!["abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab"].iter().map(|w| w.to_string()).collect();
+        assert_eq!(12, part_one(&boxes));
+        assert_eq!(7350, part_one(PUZZLE.as_slice()));
     }
 
     #[test]
     fn part_2() {
-        assert_eq!(String::from("wmlnjevbfodamyiqpucrhsukg"), part_two());
+        let boxes: Vec<String> = vec!["abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz"].iter().map(|w| w.to_string()).collect();
+        assert_eq!(String::from("fgij"), part_two(&boxes));
+        assert_eq!(String::from("wmlnjevbfodamyiqpucrhsukg"), part_two(PUZZLE.as_slice()));
     }
 }
