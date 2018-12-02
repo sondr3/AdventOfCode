@@ -1,6 +1,6 @@
 const PUZZLE: &str = include_str!("../inputs/day01.txt");
 
-pub fn run() -> Result<(), Box<std::error::Error>> {
+pub fn run() -> i32 {
     let file: Vec<i32> = PUZZLE.lines().map(|c| c.trim().parse().unwrap()).collect();
 
     let mut finished = Vec::new();
@@ -14,7 +14,15 @@ pub fn run() -> Result<(), Box<std::error::Error>> {
 
     let sum: i32 = finished.iter().sum();
 
-    println!("{}", sum);
+    sum
+}
 
-    Ok(())
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn day_one() {
+        assert_eq!(run(), 12920419);
+    }
 }
