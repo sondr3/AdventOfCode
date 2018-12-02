@@ -1,6 +1,10 @@
-const PUZZLE: &str = include_str!("../inputs/day01.txt");
+const PUZZLE: &str = include_str!("../../inputs/day01.txt");
 
-pub fn run() -> i32 {
+fn main() {
+    println!("{}", run());
+}
+
+fn run() -> i32 {
     let file: Vec<i32> = PUZZLE.lines().map(|c| c.trim().parse().unwrap()).collect();
 
     let mut finished = Vec::new();

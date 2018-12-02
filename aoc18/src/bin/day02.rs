@@ -1,14 +1,22 @@
-extern crate hashbrown;
-
+#[macro_use]
+extern crate lazy_static;
+use aoc18::hashbrown;
 use hashbrown::HashMap;
 
-const PUZZLE: &str = include_str!("../inputs/day02.txt");
+const FILE: &str = include_str!("../../inputs/day02.txt");
+lazy_static!(
+    static ref PUZZLE: Vec<&'static str> = FILE.lines().map(|w| w.trim()).collect();
+);
 
-pub fn run() -> Result<(), Box<std::error::Error>> {
-    let words: Vec<&str> = PUZZLE.lines().map(|w| w.trim()).collect();
+fn main() {
+    println!("{}", part_one());
+    println!("{}", part_two());
+}
+
+fn part_one() -> i32 {
     let mut out = HashMap::new();
 
-    for words in &words {
+    for words in PUZZLE.iter() {
         let mut counts = HashMap::new();
         for c in words.chars() {
             *counts.entry(c).or_insert(0) += 1;
@@ -28,11 +36,12 @@ pub fn run() -> Result<(), Box<std::error::Error>> {
         }
     }
 
-    println!("{:?}", out);
-    println!("Part 1: {:?}", out.get(&2).unwrap() * out.get(&3).unwrap());
+    out.get(&2).unwrap() * out.get(&3).unwrap()
+}
 
-    for (i, word) in words.iter().enumerate() {
-        for other in words.iter().skip(i + 1) {
+fn part_two() -> String {
+    for (i, word) in PUZZLE.iter().enumerate() {
+        for other in PUZZLE.iter().skip(i + 1) {
             let mut diff = 0;
             let mut removed = 0;
             for (j, (x, y)) in word.chars().zip(other.chars()).enumerate() {
@@ -48,10 +57,25 @@ pub fn run() -> Result<(), Box<std::error::Error>> {
                 println!("{}", word);
                 println!("{}", other);
                 println!("{}", finished);
-                return Ok(());
+                return finished;
             }
         }
     }
 
-    Ok(())
+    unreachable!()
+}
+
+#[cfg(test)]
+mod day02 {
+    use super::*;
+
+    #[test]
+    fn part_1() {
+        assert_eq!(7350, part_one());
+    }
+
+    #[test]
+    fn part_2() {
+        assert_eq!(String::from("wmlnjevbfodamyiqpucrhsukg"), part_two());
+    }
 }
