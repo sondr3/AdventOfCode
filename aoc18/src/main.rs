@@ -1,9 +1,9 @@
 extern crate aoc18;
 
-use aoc18::day01;
+use aoc18::day02;
 
 fn main() -> Result<(), Box<std::error::Error>> {
-    day01::run()?;
+    day02::run()?;
 
     Ok(())
 }
