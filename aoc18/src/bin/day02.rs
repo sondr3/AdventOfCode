@@ -1,19 +1,18 @@
-#[macro_use]
-extern crate lazy_static;
 use aoc18::hashbrown;
 use hashbrown::HashMap;
 
-const FILE: &str = include_str!("../../inputs/day02.txt");
-lazy_static! {
-    static ref PUZZLE: Vec<String> = FILE.lines().map(|w| w.trim().to_string()).collect();
+const PUZZLE: &str = include_str!("../../inputs/day02.txt");
+
+fn parse(input: &str) -> Vec<&str> {
+    input.lines().map(|w| w.trim()).collect()
 }
 
 fn main() {
-    println!("{}", part_one(PUZZLE.as_slice()));
-    println!("{}", part_two(PUZZLE.as_slice()));
+    println!("{}", part_one(&parse(PUZZLE)));
+    println!("{}", part_two(&parse(PUZZLE)));
 }
 
-fn part_one(input: &[String]) -> i32 {
+fn part_one(input: &[&str]) -> i32 {
     let mut out = HashMap::new();
 
     for words in input.iter() {
@@ -39,7 +38,7 @@ fn part_one(input: &[String]) -> i32 {
     out.get(&2).unwrap() * out.get(&3).unwrap()
 }
 
-fn part_two(input: &[String]) -> String {
+fn part_two(input: &[&str]) -> String {
     for (i, word) in input.iter().enumerate() {
         for other in input.iter().skip(i + 1) {
             let mut diff = 0;
@@ -68,28 +67,15 @@ mod day02 {
 
     #[test]
     fn part_1() {
-        let boxes: Vec<String> = vec![
-            "abcdef", "bababc", "abbcde", "abcccd", "aabcdd", "abcdee", "ababab",
-        ]
-        .iter()
-        .map(|w| w.to_string())
-        .collect();
-        assert_eq!(12, part_one(&boxes));
-        assert_eq!(7350, part_one(PUZZLE.as_slice()));
+        let boxes = "abcdef\nbababc\nabbcde\nabcccd\naabcdd\nabcdee\nababab";
+        assert_eq!(12, part_one(&parse(boxes)));
+        assert_eq!(7350, part_one(&parse(PUZZLE)));
     }
 
     #[test]
     fn part_2() {
-        let boxes: Vec<String> = vec![
-            "abcde", "fghij", "klmno", "pqrst", "fguij", "axcye", "wvxyz",
-        ]
-        .iter()
-        .map(|w| w.to_string())
-        .collect();
-        assert_eq!(String::from("fgij"), part_two(&boxes));
-        assert_eq!(
-            String::from("wmlnjevbfodamyiqpucrhsukg"),
-            part_two(PUZZLE.as_slice())
-        );
+        let boxes = "abcde\nfghij\nklmno\npqrst\nfguij\naxcye\nwvxyz";
+        assert_eq!("fgij", part_two(&parse(boxes)));
+        assert_eq!("wmlnjevbfodamyiqpucrhsukg", &part_two(&parse(PUZZLE)));
     }
 }
