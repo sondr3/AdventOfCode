@@ -2,9 +2,9 @@
 extern crate lazy_static;
 
 use aoc18::regex::Regex;
-use hashbrown::HashSet;
 use std::num::ParseIntError;
 use std::str::FromStr;
+use std::collections::HashSet;
 
 const PUZZLE: &str = include_str!("../../inputs/day03.txt");
 

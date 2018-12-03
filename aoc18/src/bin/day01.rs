@@ -1,5 +1,4 @@
-use aoc18::hashbrown;
-use hashbrown::HashSet;
+use std::collections::HashSet;
 
 const PUZZLE: &str = include_str!("../../inputs/day01.txt");
 
