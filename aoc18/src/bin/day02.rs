@@ -34,7 +34,7 @@ fn part_one(input: &[&str]) -> i32 {
         }
     }
 
-    out.get(&2).unwrap() * out.get(&3).unwrap()
+    out[&2] * out[&3]
 }
 
 fn part_two(input: &[&str]) -> String {
